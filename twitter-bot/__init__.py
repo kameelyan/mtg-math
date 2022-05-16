@@ -1,9 +1,9 @@
 import datetime
 import logging
 import azure.functions as func
-from app.twitter import getMentions, getRecentTweets, postTweet
-from app.utils import hyperGeometeric, hyperGeoValuesFromText
-from app.classes import Tweet, HyperGeo
+from .app.twitter import getMentions, getRecentTweets, postTweet
+from .app.utils import hyperGeometeric, hyperGeoValuesFromText
+from .app.classes import Tweet, HyperGeo
 
 def respondToTweets():
     #Get Mentions and Recent Tweet IDs
