@@ -1,9 +1,9 @@
 import datetime
 import logging
 import azure.functions as func
-from .twitter import getMentions, getRecentTweets, postTweet
-from .utils import hyperGeometeric, hyperGeoValuesFromText
-from .classes import Tweet, HyperGeo
+from app.twitter import getMentions, getRecentTweets, postTweet
+from app.utils import hyperGeometeric, hyperGeoValuesFromText
+from app.classes import Tweet, HyperGeo
 
 def respondToTweets():
     #Get Mentions and Recent Tweet IDs
@@ -25,7 +25,7 @@ def respondToTweets():
             if hyperGeo != None:
                 try:
                     newTweet = hyperGeometeric(hyperGeo)
-                    print(postTweet(newTweet, mention.id).id)
+                    logging.info(postTweet(newTweet, mention.id).id)
                 except Exception as err:
                     print(err)
 
