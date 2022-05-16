@@ -15,20 +15,21 @@ api.verify_credentials()
 
 def getMentions() -> list[Tweet]:
     mentions = api.mentions_timeline(
-        count = 50
+        count = 50,
+        tweet_mode = "extended"
     )
     results = []
     for mention in mentions:
-        results.append(Tweet(mention.id, mention.text, mention.in_reply_to_status_id))
+        results.append(Tweet(mention.id, mention.full_text, mention.in_reply_to_status_id))
 
     return results
 
 def getRecentTweets() -> list[Tweet]:
     timeline = api.user_timeline(
-        count=80,
-        tweet_mode="extended",
-        exclude_replies=False,
-        include_rts=False
+        count = 80,
+        tweet_mode = "extended",
+        exclude_replies = False,
+        include_rts = False
     )
     results = []
     for tweet in timeline:

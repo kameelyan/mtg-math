@@ -21,7 +21,8 @@ def hyperGeometeric(values: HyperGeo):
     return result
 
 def hyperGeoValuesFromText(query: str) -> Union[HyperGeo, None]:
-    match = re.search(HYPERGEO_REGEX, query)
+    regEx = re.compile(HYPERGEO_REGEX, re.DOTALL | re.IGNORECASE)
+    match = regEx.search(query)
     if match:
         return HyperGeo(
             match.group(1),
