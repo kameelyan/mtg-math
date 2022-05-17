@@ -6,7 +6,7 @@ Version: 0.01 - Alpha
 I wrote this bot to provide the community a way to run probability equations within twitter threads. It's very much a work in progress.
 
 ### Usage
-The bot will pick up the first calculation it finds. Multiple calculations are not supported at this time.
+The bot will pick up the first match it finds. Multiple matches are not supported at this time.
 
 **Hypergeometric Probability: hypergeo(M,n,N,k)**
 **M**: Total number of cards
