@@ -2,7 +2,7 @@ import datetime
 import logging
 import azure.functions as func
 from .app.twitter import getMentions, getRecentTweets, postTweet
-from .app.utils import hyperGeometeric, hyperGeoValuesFromText
+from .app.utils import valuesExtractor
 from .app.classes import Tweet, HyperGeo
 
 def respondToTweets():
@@ -20,14 +20,13 @@ def respondToTweets():
         #Check for valid syntax if we haven't replied
         #TODO Return GitHub ReadMe link if couldn't parse?
         if found == False:
-            hyperGeo = hyperGeoValuesFromText(mention.text)
-            #Reply with Answer
-            if hyperGeo != None:
-                try:
-                    newTweet = hyperGeometeric(hyperGeo)
+            try:
+                newTweet = valuesExtractor(mention.text)
+                if newTweet != None:
                     logging.info(postTweet(newTweet, mention.id).id)
-                except Exception as err:
-                    print(err)
+            except Exception as err:
+                print(err)
+                logging.error(err)
 
 def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(

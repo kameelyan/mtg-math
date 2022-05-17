@@ -2,7 +2,7 @@ import re
 from typing import Union
 from scipy.stats import hypergeom
 from .classes import HyperGeo
-from .constants import HYPERGEO_RESULT, HYPERGEO_REGEX
+from .constants import *
 
 #M Total number of cards
 #n Number of Type I cards (e.g. red cards) 
@@ -31,3 +31,22 @@ def hyperGeoValuesFromText(query: str) -> Union[HyperGeo, None]:
             match.group(4)
         )
     return None
+
+def valuesExtractor(query:str):
+    #First, check for hypergeo
+    result = hyperGeoValuesFromText(query)
+    if result != None: return hyperGeometeric(result)
+
+    #Next check for Colored Sources
+    regEx = re.compile(COLORED_SOURCES_REGEX, re.IGNORECASE)
+    match = regEx.search(query)
+    if match: return COLORED_SOURCES_RESULT
+
+    #Next check for Land Count
+    regEx = re.compile(LAND_COUNT_REGEX, re.IGNORECASE)
+    match = regEx.search(query)
+    if match: return LAND_COUNT_RESULT
+
+    #Return None to take no action
+    return None
+    
